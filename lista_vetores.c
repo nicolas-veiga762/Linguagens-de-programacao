@@ -10,73 +10,92 @@ void limpar_tela() {
     #endif
 }
 
+int compara(float a[], float b[], int n) {
+    int i;
+
+    printf("Digite os %i valores do vetor 1:\n", n);
+    for (i = 0; i < n; i++) {
+        scanf("%f", &a[i]);
+    }
+
+    printf("Digite os %i valores do vetor 2:\n", n);
+    for (i = 0; i < n; i++) {
+        scanf("%f", &b[i]);
+    }
+    
+    for (i = 0; i < n; i++) {
+        if (a[i] != b[i]) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+void fibonacci(int v[], int n) {
+	int i;
+	for (i = 0; i < n; i++) {
+		if (i == 0) {
+			v[i] = 0;
+		} else if (i == 1) {
+			v[i] = 1;
+		} else {
+			v[i] = v[i-1] + v[i-2];
+		}
+	}
+	
+	printf("Sequencia de fibonacci com %i termos: \n", n);
+	for (i = 0; i < n; i++) {
+		printf("%i\t", v[i]);
+	}
+	printf("\n");
+}
+
 int main() {
     printf("Ola professor Rui, escolha uma das opcoes a seguir para corrigir as questoes\n");
-    printf("1 - Coordenadas de um Ponto\n");
-    printf("2 - Tipos de Triangulos\n");
-    printf("3 - Tempo de Jogo\n");
-    printf("4 - Pares, Impares, Positivos e Negativos\n");
-    printf("5 - Medias Ponderadas\n");
-    printf("6 - Soma de Impares Consecutivos I\n");
-    printf("7 - Soma de Impares Consecutivos II\n");
+    printf("1 - Comparacao de vetores\n");
+    printf("2 - Vetor de fibonacci\n");
+    printf("3 - Soma de primos\n");
+    printf("4 - Busca todos\n");
+    printf("5 - Versao recursiva busca sequencial\n");
     printf("\n");
+
     int opcao;
     scanf("%d", &opcao);
 
     switch (opcao) {
     case 1: {
-    	float a, b;
-        printf("Digite suas coordenadas.");
-        scanf("%f %f", &a, &b);
-        coordenadas(a, b);
+        int x;
+        printf("Digite a capacidade do vetor: ");
+        scanf("%i", &x);
+
+        float vet1[x], vet2[x];
+        int iguais = compara(vet1, vet2, x);
+        
+        if (iguais) {
+        	printf("Os vetores sao iguais em todas as posicoes.");
+		} else {
+			printf("Os vetores nao sao iguais em suas posicoes.");
+		}
         return 0;
-		break;
-	}
+    }
     case 2: {
-		float c, d, e;
-        printf("Digite as arestas do seu triangulo.");
-        scanf("%f %f %f", &c, &d, &e);
-        tipos_triangulos(c, d, e);
+    	int a;
+    	printf("Digite a quantidade de n termos da sequencia de fibonacci: ");
+    	scanf("%i", &a);
+    	
+    	int vet3[a];
+    	fibonacci(vet3, a);
+    	
         return 0;
-    	break;
-	}   
+    }   
     case 3: {
-		int f, g, h, i;
-    	printf("Digite o horario inicial (HH MM): \n");
-    	scanf("%i %i", &f, &g);
-    	printf("Digite o horario final (HH MM): \n");
-    	scanf("%i %i", &h, &i);
-    	tempo_de_jogo(f, g, h, i);
-    	return 0;
-    	break;
-	}
-	case 4: {
-		int n1;
-		printf("Digite os N numeros que voce quer verificar.\n");
-		scanf("%i", &n1);
-		pares_impares_positivos_negativos(n1);
-		break;
-	}
-	case 5: {
-		int n2;
-		printf("Digite a quantia de N numeros nas medias ponderadas.\n");
-		scanf("%i", &n2);
-		medias_ponderadas(n2);
-		break;
-	}
-	case 6: {
-		int j, k;
-		printf("Digite os numeros para a soma de impares consecutivos.\n");
-		scanf("%i %i", &j, &k);
-		soma_impares_consecutivos_1(j, k);
-		break;
-	}
-	case 7: {
-		int n3;
-		printf("Digite a quantia de N numeros da soma de consecutivos.\n");
-		scanf("%i", &n3);
-		soma_impares_consecutivos_2(n3);
-		break;
-	}
+        return 0;
+    }
+    case 4: {
+        return 0;
+    }
+    case 5: {
+        return 0;
+    }
     }
 }
