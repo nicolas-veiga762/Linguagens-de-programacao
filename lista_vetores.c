@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <stdio.h> 
 #include <math.h>
 #include <stdlib.h>
 
@@ -8,6 +8,18 @@ void limpar_tela() {
     #else
         system("clear");
     #endif
+}
+
+int ehprimo (int x) {
+	int i;
+	if (x <= 1) return 0;
+	
+	for (i = 2; i < x; i++) {
+		if (x % i == 0) {
+			return 0;
+		}
+	}
+	return 1;
 }
 
 int compara(float a[], float b[], int n) {
@@ -50,6 +62,46 @@ void fibonacci(int v[], int n) {
 	printf("\n");
 }
 
+int soma_primos(int v[], int a) {
+	int i;
+	int qntd_primos = 0;
+	int somatoria_primos = 0;
+	printf("Digite os %i valores do vetor:\n", a);
+	for (i = 0; i < a; i++) {
+		scanf("%i", &v[i]);
+	}
+	
+	for (i = 0; i < a; i++) {
+		if (ehprimo(v[i])) {
+			qntd_primos++;
+			somatoria_primos += v[i];
+		}
+	}
+	
+	printf("Quantidade de primos no vetor: %i primos.\n ", qntd_primos);
+    
+    return somatoria_primos;
+}
+
+void busca_todos(int v[], int n, int chave, int indices[]) {
+    int i, j;
+    for (i = 0; i < n; i++) {
+        if (v[i] == chave) {
+            indices[j] = i;
+            j++;
+        }
+    }
+    for (j = 0; j < n; j++) {
+        indices[j] = -1;
+    }
+}
+
+int busca_seq_rec(int v[], int n, int chave) {
+    if (n == 0) return -1;
+    if (v[n - 1] == chave) return n - 1;
+    return busca_seq_rec(v, n - 1, chave);
+}
+
 int main() {
     printf("Ola professor Rui, escolha uma das opcoes a seguir para corrigir as questoes\n");
     printf("1 - Comparacao de vetores\n");
@@ -89,12 +141,67 @@ int main() {
         return 0;
     }   
     case 3: {
+    	int n;
+    	printf("Digite a capacidade do vetor: ");
+    	scanf("%i", &n);
+    	
+    	int vet4[n];
+    	
+    	int soma = soma_primos(vet4, n);
+        printf("A soma retornada pela funcao foi: %i\n", soma);
+
         return 0;
     }
     case 4: {
+    	int n, chave, i;
+    	printf("Digite a capacidade do vetor: ");
+    	scanf("%i", &n);
+    	
+    	int vet[n], indices[n];
+    	
+    	printf("Digite os %i valores do vetor:\n", n);
+    	for (i = 0; i < n; i++) {
+        	scanf("%i", &vet[i]);
+    	}
+
+    	printf("Digite a chave de busca: ");
+    	scanf("%i", &chave);
+
+    	busca_todos(vet, n, chave, indices);
+
+    	printf("indices = {");
+    	for (i = 0; i < n; i++) {
+        	printf("%i", indices[i]);
+        	if (i < n - 1) {
+            	printf(", ");
+        	}
+    	}	
+    	printf("}\n");
+
         return 0;
     }
     case 5: {
+        int n, chave, i;
+        printf("Digite a capacidade do vetor: ");
+        scanf("%i", &n);
+        
+        int vet[n];
+        
+        printf("Digite os %i valores do vetor:\n", n);
+        for (i = 0; i < n; i++) {
+        	scanf("%i", &vet[i]);
+
+		}
+        printf("Digite a chave de busca: ");
+        scanf("%i", &chave);
+        
+        int pos = busca_seq_rec(vet, n, chave);
+        if (pos == -1) {
+			printf("Chave nao encontrada.\n"); 	
+		} else {
+			printf("Chave encontrada na posicao %i.\n", pos);
+		}
+		
         return 0;
     }
     }
