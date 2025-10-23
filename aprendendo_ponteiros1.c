@@ -10,9 +10,9 @@ int main() {
 	
 	/*
 		Um ponteiro pode apontar para:
-		– Uma variável;
-		– Outro ponteiro;
-		– Uma área de memória alocada dinamicamente;
+		– Uma variável.
+		– Outro ponteiro.
+		– Uma área de memória alocada dinamicamente.
 		– Uma função.
 		
 		Situações Típicas de Uso de Ponteiros
