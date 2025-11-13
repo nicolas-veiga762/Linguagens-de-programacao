@@ -27,6 +27,51 @@ void calcula_hora(int totalMinutos, int *ph, int *pm) {
     *pm = totalMinutos % 60;
 }
 
+void max_min(int vet[], int tam, int *min, int *max) {
+    *min = vet[0];
+    *max = vet[0];
+    for(int i = 1; i < tam; i++) {
+        if (vet[i] < *min) {
+            *min = vet[i];
+        }
+        if (vet[i] > *max) {
+            *max = vet[i];
+        }
+    }
+    printf("Maior valor: %d | Menor valor: %d\n", *max, *min);
+}
+
+void max_vetor(float vet[], int tam, float *max, int *indice) {
+    *max = vet[0];
+    *indice = 0;
+    for(int i = 1; i < tam; i++) {
+        if (vet[i] > *max) {
+            *max = vet[i];
+            *indice = i;
+        }
+    }
+    printf("O valor %.2f, e o maior valor do vetor, e esta na posicao %i", *max, *indice);
+}
+
+void min_matriz(float mat[3][4], float *min, int *linha, int *coluna) {
+    *min = mat[0][0];
+    *linha = 0;
+    *coluna = 0;
+
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 4; j++) {
+            if (mat[i][j] < *min) {
+                *min = mat[i][j];
+                *linha = i;
+                *coluna = j;
+            }
+        }
+    }
+
+    printf("Menor valor: %.2f | Linha: %d | Coluna: %d\n", *min, *linha, *coluna);
+}
+
+
 int main(void) {
     printf("Ola professor Rui, escolha uma das opcoes a seguir para corrigir as questoes\n");
     printf("1 - inc_dec\n");
@@ -74,12 +119,52 @@ int main(void) {
             break;
         }
         case 5: {
+            int n; 
+            printf("Digite a capacidade do vetor: ");
+            scanf("%d", &n);
+            
+            int vet[n]; 
+            
+            printf("Digite os valores do vetor: \n");
+            for(int i = 0; i < n; i++) {
+                scanf("%d", &vet[i]);
+            }    
+            
+            int max = 0, min = 0;
+
+            max_min(vet, n, &min, &max);
             break;
         }
         case 6: {
+            int n;
+            printf("Digite a capacidade do vetor: ");
+            scanf("%d", &n);
+
+            float vet[n];
+            printf("Digite os valores do vetor:\n");
+            for (int i = 0; i < n; i++) {
+                scanf("%f", &vet[i]);
+            }
+        
+            float max;
+            int indice;
+            max_vetor(vet, n, &max, &indice);
             break;
         }
         case 7: {
+            float mat[3][4];
+
+            printf("Digite os valores da matriz 3x4:\n");
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 4; j++) {
+                    scanf("%f", &mat[i][j]);
+                }
+            }
+        
+            float min;
+            int iMin, jMin;
+        
+            min_matriz(mat, &min, &iMin, &jMin);
             break;
         }
     } 
